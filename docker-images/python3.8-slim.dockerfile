@@ -1,7 +1,5 @@
 FROM python:3.8-slim
 
-LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
-
 RUN pip install --no-cache-dir "uvicorn[standard]" gunicorn
 
 COPY ./start.sh /start.sh
@@ -17,7 +15,7 @@ WORKDIR /app/
 
 ENV PYTHONPATH=/app
 
-EXPOSE 80
+EXPOSE 9090
 
 # Run the start script, it will check for an /app/prestart.sh script (e.g. for migrations)
 # And then will start Gunicorn with Uvicorn
