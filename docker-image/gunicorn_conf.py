@@ -29,11 +29,6 @@ else:
     web_concurrency = max(int(default_web_concurrency), 2)
     if use_max_workers:
         web_concurrency = min(web_concurrency, use_max_workers)
-try:
-    logger = importlib.import_module("server.core.logger")
-    logging_config = logger.LOGGING_CONFIG
-except (ModuleNotFoundError, AttributeError):
-    logging_config = None
 use_accesslog = os.getenv("ACCESS_LOG", None)
 errorlog_var = os.getenv("ERROR_LOG", "-")
 use_errorlog = errorlog_var or None
@@ -43,7 +38,6 @@ keepalive_str = os.getenv("KEEP_ALIVE", "5")
 
 # Gunicorn config variables
 loglevel = use_loglevel
-logconfig_dict = logging_config
 workers = web_concurrency
 bind = use_bind
 errorlog = use_errorlog
